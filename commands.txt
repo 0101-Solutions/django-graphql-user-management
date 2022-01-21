@@ -1,5 +1,6 @@
-python3 -m venv my_env && source my_env/bin/activate && pip install django && django-admin startproject core .
-python3 manage.py startapp base
+python3.9 -m venv my_env && source my_env/bin/activate && pip install django
+django-admin startproject core .
+python3.9 manage.py startapp base
 pip install -r requirements.txt
 coverage run --omit='*/my_env/*' manage.py test
 coverage html

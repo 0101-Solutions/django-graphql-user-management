@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'users',
+    'graphene_django',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +128,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'users.ExtendedUser'
+
+
+GRAPHENE = {
+    'SCHEMA' : 'users.schema.schema',
+
+    # Adding JWT Middleware
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
+}
+
+# Refactoring our Authentication Backend to tell Django to use this Auth Backend
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
